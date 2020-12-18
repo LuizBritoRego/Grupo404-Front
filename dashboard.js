@@ -20,44 +20,45 @@ function preencheDash(lista){
     console.log(lista);
     var nomeAgente;
     var volume;
-    var sucesso;
-    var falhas;
-    var fraudes;
+    var suc;
+    var fal;
+    var fra;
 
     for (i=0; i<lista.length; i++){
         var ag = lista[i];
         nomeAgente = ag.nomeAgente;
         volume = ag.volume;
-        
-        if (ag.status == 0) {
-            sucesso = ag.numeroOp;
+        if (ag.status == 0){
+            suc = ag.numeroOp;
         }
-        else if (ag.status == 1) {
-            falhas = ag.numeroOp;
+        else if (ag.status == 1){
+            fal = ag.numeroOp;
         }
         else{
-            fraudes = ag.numeroOp;
+            fra = ag.numeroOp;
         }
     }
 
     document.getElementById("nomeAgente").innerHTML = "<h3>"+nomeAgente+"</h3>";
-    document.getElementById("volumeAgente").innerHTML = "<h3>"+volume+"</h3>";
-    document.getElementById("sucessoAgente").innerHTML = "<h3>"+sucesso+"</h3>";
-    document.getElementById("falhasAgente").innerHTML = "<h3>"+falhas+"</h3>";
-    document.getElementById("fraudesAgente").innerHTML = "<h3>"+fraudes+"</h3>";
- 
+    document.getElementById("volumeAgente").innerHTML = "<h5>Volume Transacional: "+volume+"</h5>";
+    document.getElementById("sucesso").innerHTML = "<h6>• Sucesso: "+suc+"</h6>";
+    document.getElementById("falha").innerHTML = "<h6>• Falhas: "+fal+"</h6>";
+    document.getElementById("fraude").innerHTML = "<h6>• Fraudes: "+fra+"</h6>";
+   // document.getElementById("volumeAgente").innerHTML = "<h4>Volume Transacional: "+volume+"</h4>";
+
+
     var ctx = document.getElementById('meuGrafico');
     var myChart = new Chart(ctx, {
-        type: 'doughnut',
+        type: 'pie',
         data: {
-            labels: ['Sucesso', 'Falhas', 'Fraude'],
+            labels: ['Sucesso', 'Falha', 'Fraude'],
             datasets: [{
-                label: 'Gráfico das Operações',
-                data: [sucesso, falhas, fraudes],
+                label: '# de operacoes',
+                data: [suc, fal, fra],
                 backgroundColor: [
-                    'rgba(0,255,21,0.5)',
-                    'rgba(0,120,120,0.5)',
-                    'rgba(255,0,0,0.5)'
+                    'rgba(0,255,0,0.3)',
+                    'rgba(255,255,0,0.3)',
+                    'rgba(255,0,0,0.3)'
                 ]
            }]
         },
@@ -65,3 +66,44 @@ function preencheDash(lista){
     });
 }
 
+
+
+/*
+var ctx = document.getElementById('myChart');
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        datasets: [{
+            label: '# of Votes',
+            data: [12, 19, 3, 5, 2, 3],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+});
+*/
