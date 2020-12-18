@@ -14,6 +14,11 @@ function carregaDash(){
     fetch("http://localhost:8088/totaisconsolidados?id="+idAgente)
        .then(res => res.json())
        .then(lista => preencheDash(lista));
+
+    fetch("http://localhost:8088/agentes")
+       .then(resposta => resposta.json())  // se houver resposta, extrai o json dela
+       .then(lista => preencheLista(lista));   // se conseguiu extrair a lista, chama a função com essa lista
+
 }
 
 function preencheDash(lista){
@@ -107,3 +112,12 @@ var myChart = new Chart(ctx, {
     }
 });
 */
+
+function preencheLista(lista){
+    var strdrop = "";
+    for (i=0; i<lista.length; i++){
+        var agente = lista[i];  
+        strdrop = strdrop + `<li><a class="dropdown-item" href="dashboard.html?id=${agente.id}">${agente.nome}</a></li>`
+    }
+    document.getElementById("itensmenu").innerHTML = strdrop;
+}

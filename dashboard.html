@@ -13,13 +13,7 @@
 
 
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid" style="background-color: black;">
-            <a class="navbar-brand"><img src="404error1.png" height="40px"></a>
-            <button type="button" class="btn btn-primary" onclick="logout()">logout</button>
-        </div>
-    </nav>
-
+    
 </head>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"
@@ -29,10 +23,51 @@
 </head>
 
 <body onload="carregaDash()">
+    <nav class="navbar navbar-expand-lg navbar-light" style="color: #FFFFFF; background-color:black">
+        <div class="container-fluid">
+            <div class="d-flex justify-content-start">
+                <a class="navbar-brand" style="color:  #FFFFFF;
+                    margin-block-start: 1em;
+                    margin-block-end: 1em;
+                    margin-inline-start: 0px;
+                    margin-inline-end: 0px;
+                    padding-inline-start: 40px">
+                    <img src="404error1.png" height="50px">
+                </a>
+            </div>
+            <div class="d-flex justify-content-end">
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <div class="d-flex align-items-center">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="color: #FFFFFF;
+                        margin-block-start: 1em;
+                        margin-block-end: 1em;
+                        margin-inline-start: 30px;
+                        margin-inline-end: 30x;
+                        padding-inline-start: 40px;
+                        font-size: 20px">
+                        <li class="nav-item" >
+                            <a class="nav-link active" aria-current="page" style="color: #FFFFFF" href="agentes.html">Agentes</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" style="color: #FFFFFF" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Dashboard
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown" id="itensmenu">
+                            <!--dropdown gerado automaticamente pelo banco-->
+                            </ul>
+                        </li>
+                        </ul>
+                    </div>
+                    <button type="button" onclick="logout()" class="btn btn-outline-secondary">Logout</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
     <div class="container">
         <div class="row">
             <div class="col-12 text-center">
-                <h2>DASHBOARD | Agente Financeiro </h2>
+                <h2><br> DASHBOARD | Agente Financeiro </h2>
             </div>
         </div>
 
