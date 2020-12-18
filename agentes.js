@@ -1,6 +1,9 @@
 function carregainfo(){
+
     // primeira coisa: o usuario tá logado?
+
     var objUser = localStorage.getItem("dashcardUser");
+    
     if (!objUser){ // se este objeto não exisitr no local Storage, significa que ele não está logado, logo manda pro index
         window.location = "index.html";
     }
@@ -9,17 +12,18 @@ function carregainfo(){
 
     // eu gero "dinamicamente" conteúdo HTML nos textos das DIV para que eu consiga
     // mostrar os dados que eu quiser
-    document.getElementById("fotoUser").innerHTML = `<img src="${user.linkFoto}" width="100%">`;
+
+    document.getElementById("fotoUser").innerHTML = `<img src="${user.linkFoto}" class="rounded" width="70%">`;
     document.getElementById("infoUser").innerHTML = `<h3>${user.nome}</h3>
                                                      <strong>RACF</strong> ${user.racf} <br>
                                                      <strong>EMAIL</strong> ${user.email} <br>`;
-
 
     // e se eu quiser recuperar os agentes?
     // passo 1 - fazer um fetch (Sem cabeçalho) para o backend
     // passo 2 - tratar o resultado gerando uma tabela para exibir 1 agente financeiro por linha
 
     // passo 1
+
     fetch("http://localhost:8088/agentes")
         .then(resposta => resposta.json())  // se houver resposta, extrai o json dela
         .then(lista => preencheLista(lista));   // se conseguiu extrair a lista, chama a função com essa lista
@@ -32,7 +36,7 @@ function carregainfo(){
 }
 
 function preencheLista(lista){
-   
+
     var linha="linhaPar";
     var strSelect = `<select id="selectAgente" class="form-select">
                         <option value="-1"> -- SELECIONE O AGENTE -- </option>`;
@@ -40,6 +44,8 @@ function preencheLista(lista){
                        <div class = "col-8 text-center"> <strong> Agente Financeiro</strong> </div>
                        <div class = "col-4 text-center"> <strong>Volume</strong> </div>
                     </div>`;
+    var strdrop = "";
+
     for (i=0; i<lista.length; i++){
         var agente = lista[i];
         if (i%2==0){
@@ -48,20 +54,34 @@ function preencheLista(lista){
         else{
             linha = "linhaImpar";
         }
-        
+     
         strLista = strLista + `<div class="row ${linha}">
                                 <div class="col-8">${agente.nome}</div>
                                 <div class="col-4 text-center">${agente.volume}</div>
                               </div>`; 
-
         strSelect = strSelect + `<option value="${agente.id}">${agente.nome}</option>`;
+    
+        strdrop = strdrop + `<li><a class="dropdown-item" href="dashboard.html?id=${agente.id}">${agente.nome}</a></li>`
+    
     }
+
     strSelect = strSelect + `</select>`;
     document.getElementById("divAgente").innerHTML = strSelect;
     document.getElementById("tabelaAgentes").innerHTML = strLista;
+    document.getElementById("itensmenu").innerHTML = strdrop;
 }
-function seleciona(){
-var id = document.getElementById("selectAgente").value;
-window.location = "dashboard.html?id="+ id;
 
+function seleciona(){
+    var idAgente = document.getElementById("selectAgente").value;
+    console.log("Agente selecionado = "+idAgente);
+    if (idAgente == -1){
+        alert("Por favor, selecione um agente financeiro válido");
+        return;
+    }
+    window.location = "dashboard.html?id="+idAgente;
+}
+
+function logout(){
+localStorage.removeItem("dashcardUser");
+window.location = "index.html";
 }
