@@ -121,3 +121,8 @@ function preencheLista(lista){
     }
     document.getElementById("itensmenu").innerHTML = strdrop;
 }
+
+function logout(){
+    localStorage.removeItem("dashcardUser");
+    window.location = "index.html";
+    }
